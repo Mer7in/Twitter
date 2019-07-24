@@ -20,6 +20,9 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client=TwitterApp.getRestClient(this);
+
+        //find the recycler view
+        //Initialize list 
         populateHomeTimeLine();
     }
 
