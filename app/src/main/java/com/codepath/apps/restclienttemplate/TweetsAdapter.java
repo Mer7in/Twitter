@@ -16,10 +16,8 @@ import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
 
-
     private Context context;
     private List<Tweet> tweets;
-    private View view;
 
     // Pass in context and list of tweets
     public TweetsAdapter(Context context, List<Tweet> tweets)
@@ -31,7 +29,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater.from(context).inflate(R.layout.item_tweet,parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_tweet,parent, false);
         return new ViewHolder(view);
 
     }
@@ -49,8 +47,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public int getItemCount() {
         return tweets.size();
     }
-    // define the ViewHoler
 
+    // define the ViewHoler
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         public ImageView ivProfileImage;
