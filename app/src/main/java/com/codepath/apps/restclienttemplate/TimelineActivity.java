@@ -34,8 +34,8 @@ public class TimelineActivity extends AppCompatActivity {
         client=TwitterApp.getRestClient(this);
         swipeContainer =findViewById(R.id.swipeContainer);
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
+                android.R.color.holo_blue_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
@@ -47,6 +47,18 @@ public class TimelineActivity extends AppCompatActivity {
         adapter=new TweetsAdapter(this,tweets);
         // Recycler View seetup: layout manager and setting the adapter
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
+
+        // Retain an instance so that you can call `resetState()` for fresh searches
+        EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(new LinearLayoutManager(this)) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadMoreData();
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        rvTweets.addOnScrollListener(scrollListener);
         rvTweets.setAdapter(adapter);
         populateHomeTimeLine();
 
@@ -57,6 +69,14 @@ public class TimelineActivity extends AppCompatActivity {
                 populateHomeTimeLine();
             }
         });
+    }
+
+    // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
+    public void loadMoreData() {
+        // 1. Send an API request to retrieve appropriate paginated data
+        // 2. Deserialize and construct new model objects from the API response
+        // 3. Append the new data objects to the existing set of items inside the array of items
+        // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }
 
     public void populateHomeTimeLine()
