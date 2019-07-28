@@ -2,7 +2,7 @@
 
 **Name of your app** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **X** hours spent in total
+Time spent: **47** hours spent in total
 
 ## User Stories
 
@@ -38,7 +38,6 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://media.giphy.com/media/kbWhoyr6SoD5AIpwax/giphy.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
