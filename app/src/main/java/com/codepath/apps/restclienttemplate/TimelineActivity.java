@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -26,6 +27,7 @@ public class TimelineActivity extends AppCompatActivity {
     private TweetsAdapter adapter;
     private List<Tweet> tweets;
     private SwipeRefreshLayout swipeContainer;
+    private EndlessRecyclerViewScrollListener scrollListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +48,11 @@ public class TimelineActivity extends AppCompatActivity {
         tweets=new ArrayList<>();
         adapter=new TweetsAdapter(this,tweets);
         // Recycler View seetup: layout manager and setting the adapter
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        rvTweets.setLayoutManager(linearLayoutManager);
 
         // Retain an instance so that you can call `resetState()` for fresh searches
-        EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(new LinearLayoutManager(this)) {
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
