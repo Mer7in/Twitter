@@ -55,13 +55,17 @@ public class TimelineActivity extends AppCompatActivity {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                List<Tweet> moretweets=Tweet.fromJSON((JSONArray) tweets);
+                int curSize=adapter.getItemCount();
+
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                loadMoreData();
+                loadNextDataFromApi(page);
             }
         };
         // Adds the scroll listener to RecyclerView
         rvTweets.addOnScrollListener(scrollListener);
+
         rvTweets.setAdapter(adapter);
         populateHomeTimeLine();
 
@@ -75,7 +79,7 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
-    public void loadMoreData() {
+    public void loadNextDataFromApi(int offset) {
         // 1. Send an API request to retrieve appropriate paginated data
         // 2. Deserialize and construct new model objects from the API response
         // 3. Append the new data objects to the existing set of items inside the array of items
