@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -93,6 +95,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.compose)
@@ -116,6 +119,7 @@ public class TimelineActivity extends AppCompatActivity {
             //Update the recylcler view with this tweet
             tweets.add(0,tweet);
             adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
         }
     }
 
